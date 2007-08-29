@@ -168,7 +168,7 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %{_defaultdocdir}/%{name}-server-%{version}/
 %{_mandir}/man1/tinyerp-server.*
 %{_libdir}/python2.5/site-packages/tinyerp_server-4.0.3-py2.5.egg-info
-%{_mandir}/man5/terp_serverrc.5.bz2
+%{_mandir}/man5/terp_serverrc.5*
 
 %pre server
 %_pre_useradd tinyerp /var/spool/tinyerp /sbin/nologin
