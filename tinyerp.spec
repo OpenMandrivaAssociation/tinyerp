@@ -16,7 +16,7 @@
 
 
 Name:		tinyerp
-Version:	4.0.3
+Version:	4.2.0
 Release:	%mkrel 1
 License:	GPL
 Group:		Databases
@@ -46,9 +46,9 @@ Patch0:		tinyerp-client.patch
 Patch1:		tinyerp-server.patch
 
 %description
-Tiny ERP is a free enterprise management software package. It 
-covers all domains for small to medium businesses; accounting, 
-stock management, sales, customer relationship, purchases, 
+Tiny ERP is a free enterprise management software package. It
+covers all domains for small to medium businesses; accounting,
+stock management, sales, customer relationship, purchases,
 project management...
 
 %package client
@@ -69,7 +69,7 @@ Requires:	python-psycopg, python-libxslt
 Requires:	postgresql-plpython
 Requires:	python-imaging
 Requires:	python-psycopg, python-reportlab
-Requires:	graphviz, python-parsing, postgresql-server
+Requires:	graphviz, python-parsing, postgresql8.2-server
 Requires:	ghostscript
 Requires(pre):	rpm-helper
 Requires(postun):	rpm-helper
@@ -110,7 +110,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=%{title}
 Comment=%{longtitle}
-Exec=%{_bindir}/%{name} 
+Exec=%{_bindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_defaultdocdir}/%{name}-%{version}/README.urpmi
 
 %files client -f %{name}-client.lang
-%doc 
+%doc
 %defattr(-,root,root)
 %{_bindir}/tinyerp-client
 %{python_sitelib}/tinyerp-client/
@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tinyerp-client.*
 %{_datadir}/pixmaps/tinyerp-client/
 %{_datadir}/applications/*.desktop
-%{_libdir}/python2.5/site-packages/tinyerp_client-4.0.3-py2.5.egg-info
+%{_libdir}/python2.5/site-packages/tinyerp_client-%{version}-py2.5.egg-info
 
 %post client
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
@@ -164,10 +164,10 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/tinyerp-server.conf
 %attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/logrotate.d/tinyerp-server
 %{_bindir}/tinyerp-server
-%{python_sitelib}/tinyerp-server/   
+%{python_sitelib}/tinyerp-server/
 %{_defaultdocdir}/%{name}-server-%{version}/
 %{_mandir}/man1/tinyerp-server.*
-%{_libdir}/python2.5/site-packages/tinyerp_server-4.0.3-py2.5.egg-info
+%{_libdir}/python2.5/site-packages/tinyerp_server-%{version}-py2.5.egg-info
 %{_mandir}/man5/terp_serverrc.5*
 
 %pre server
