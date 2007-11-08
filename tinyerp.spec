@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tinyerp-client.*
 %{_datadir}/pixmaps/tinyerp-client/
 %{_datadir}/applications/*.desktop
-#%{_libdir}/python2.5/site-packages/tinyerp_client-%{version}-py2.5.egg-info
+%{py_puresitedir}/tinyerp_client-%{version}-py2.5.egg-info
 
 %post client
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
@@ -167,7 +167,7 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %{python_sitelib}/tinyerp-server/
 %{_defaultdocdir}/%{name}-server-%{version}/
 %{_mandir}/man1/tinyerp-server.*
-#%{_libdir}/python2.5/site-packages/tinyerp_server-%{version}-py2.5.egg-info
+%{py_puresitedir}/tinyerp_server-%{version}-py2.5.egg-info
 %{_mandir}/man5/terp_serverrc.5*
 
 %pre server
