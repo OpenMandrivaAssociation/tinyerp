@@ -66,7 +66,7 @@ Group:		System/Servers
 Summary:	Open Source ERP Server
 Requires:	pygtk2.0, pygtk2.0-libglade
 Requires:	python-psycopg, python-libxslt
-Requires:	postgresql-plpython
+Requires:	postgresql8.2-plpython
 Requires:	python-imaging
 Requires:	python-psycopg, python-reportlab
 Requires:	graphviz, python-parsing, postgresql8.2-server
