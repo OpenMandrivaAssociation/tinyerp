@@ -28,6 +28,7 @@ Source2:	tinyerp-server.conf
 Source3:	tinyerp-server.init
 Source4:	tinyerp-server.logrotate
 Source5:	tinyerp-README.urpmi
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:	noarch
 BuildRequires:	python, pygtk2.0-devel, pygtk2.0-libglade, python-libxslt
 BuildRequires:	python-psycopg, python-dot
