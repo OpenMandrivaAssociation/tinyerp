@@ -16,14 +16,14 @@
 
 
 Name:		tinyerp
-Version:	4.2.0
-Release:	%mkrel 3
+Version:	4.2.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Databases
 Summary:	Open Source ERP Client
 URL:		http://tinyerp.org
-Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.bz2
-Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.bz2
+Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.gz
+Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.gz
 Source2:	tinyerp-server.conf
 Source3:	tinyerp-server.init
 Source4:	tinyerp-server.logrotate
