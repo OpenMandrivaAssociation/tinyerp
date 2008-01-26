@@ -17,8 +17,8 @@
 
 Name:		tinyerp
 Version:	4.2.0
-Release:	%mkrel 2
-License:	GPL
+Release:	%mkrel 3
+License:	GPLv2+
 Group:		Databases
 Summary:	Open Source ERP Client
 URL:		http://tinyerp.org
@@ -108,20 +108,15 @@ rm -rf $RPM_BUILD_ROOT/%{_datadir}/tinyerp-client
 mkdir $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Name=%{title}
-Comment=%{longtitle}
+Name=Tiny ERP
+Comment=Open Source ERP Client
 Exec=%{_bindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;Application;Databases;X-Mandrakelinux-MoreApplications-Databases;
+Categories=GNOME;GTK;Databases;
 EOF
-
-#cd $RPM_BUILD_ROOT%{python_sitelib}/tinyerp-client
-#for i in tinyerp.png tinyerp_icon.png tinyerp-icon-16x16.png tinyerp-icon-32x32.png tinyerp-icon-64x64.png; do
-#	ln -s ../../../../share/pixmaps/tinyerp-client/$i $i
-#done
 
 mkdir -p $RPM_BUILD_ROOT/%{_defaultdocdir}/%{name}-%{version}
 install -m 644 -D %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tinyerp-server.conf
@@ -182,5 +177,3 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %postun server
 %_postun_service tinyerp-server
 %_postun_userdel tinyerp
-
-
