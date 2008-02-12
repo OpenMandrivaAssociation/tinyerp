@@ -77,7 +77,8 @@ Requires(postun):	rpm-helper
 %description server
 Server components for Tiny ERP.
 
-IMPORTANT: Please read the INSTALL file in /usr/share/doc/tinyerp-server for the first
+IMPORTANT: Please read the INSTALL file in /usr/share/doc/tinyerp-server for
+the first
 time run.
 
 %prep
