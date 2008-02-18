@@ -17,10 +17,10 @@
 
 Name:		tinyerp
 Version:	4.2.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Databases
-Summary:	Open Source ERP Client
+Summary:	ERP Client
 URL:		http://tinyerp.org
 Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.gz
 Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.gz
@@ -53,7 +53,7 @@ project management...
 
 %package client
 Group:		Databases
-Summary:	Open Source ERP Client
+Summary:	ERP Client
 Requires:       pygtk2.0, pygtk2.0-libglade, python-dot
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
@@ -63,7 +63,7 @@ Client components for Tiny ERP.
 
 %package server
 Group:		System/Servers
-Summary:	Open Source ERP Server
+Summary:	ERP Server
 Requires:	pygtk2.0, pygtk2.0-libglade
 Requires:	python-psycopg, python-libxslt
 Requires:	postgresql8.2-plpython
