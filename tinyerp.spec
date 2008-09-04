@@ -16,14 +16,14 @@
 
 
 Name:		tinyerp
-Version:	4.2.1
-Release:	%mkrel 5
+Version:	4.2.3
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Databases
 Summary:	ERP Client
 URL:		http://tinyerp.org
-Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.gz
-Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.gz
+Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.bz2
+Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.bz2
 Source2:	tinyerp-server.conf
 Source3:	tinyerp-server.init
 Source4:	tinyerp-server.logrotate
@@ -87,18 +87,18 @@ time run.
 #%patch1
 
 %build
-cd tinyerp-client-%{version}
+cd client
 %{_xvfb} :69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py build
-cd ../tinyerp-server-%{version}
+cd ../server
 DISPLAY=:69 ./setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd tinyerp-client-%{version}
+cd client
 %{_xvfb} :69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
-cd ../tinyerp-server-%{version}
+cd ../server
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
 cd ..
 %find_lang tinyerp-client
