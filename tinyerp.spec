@@ -16,7 +16,7 @@
 
 
 Name:		tinyerp
-Version:	4.2.3
+Version:	4.2.3.4
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Databases
@@ -83,22 +83,20 @@ time run.
 
 %prep
 %setup -q -a 1 -c %{name}-%{version}
-#%patch0
-#%patch1
 
 %build
-cd client
+cd %{name}-client-%{version}
 %{_xvfb} :69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py build
-cd ../server
+cd ../%{name}-server-%{version}
 DISPLAY=:69 ./setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd client
+cd %{name}-client-%{version}
 %{_xvfb} :69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
-cd ../server
+cd ../%{name}-server-%{version}
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
 cd ..
 %find_lang tinyerp-client
@@ -143,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/tinyerp-client.*
 %{_datadir}/pixmaps/tinyerp-client/
 %{_datadir}/applications/*.desktop
-%{py_puresitedir}/tinyerp_client-%{version}-py2.5.egg-info
+%{py_puresitedir}/tinyerp_client-%{version}-py2.6.egg-info
 
 %post client
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
@@ -163,7 +161,7 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %{python_sitelib}/tinyerp-server/
 %{_defaultdocdir}/%{name}-server-%{version}/
 %{_mandir}/man1/tinyerp-server.*
-%{py_puresitedir}/tinyerp_server-%{version}-py2.5.egg-info
+%{py_puresitedir}/tinyerp_server-%{version}-py2.6.egg-info
 %{_mandir}/man5/terp_serverrc.5*
 
 %pre server
