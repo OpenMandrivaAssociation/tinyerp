@@ -17,7 +17,7 @@
 
 Name:		tinyerp
 Version:	4.2.3.4
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Databases
 Summary:	ERP Client
