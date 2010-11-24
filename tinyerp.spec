@@ -136,12 +136,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 %defattr(-,root,root)
 %{_bindir}/tinyerp-client
-%{python_sitelib}/tinyerp-client/
+%{python_sitelib}/tinyerp-client
+%{python_sitelib}/tinyerp_client*
 %{_defaultdocdir}/%{name}-client-%{version}/
 %{_mandir}/man1/tinyerp-client.*
 %{_datadir}/pixmaps/tinyerp-client/
 %{_datadir}/applications/*.desktop
-%{py_puresitedir}/tinyerp_client-%{version}-py2.6.egg-info
 
 %post client
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
@@ -158,10 +158,10 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/tinyerp-server.conf
 %attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/logrotate.d/tinyerp-server
 %{_bindir}/tinyerp-server
-%{python_sitelib}/tinyerp-server/
+%{python_sitelib}/tinyerp-server
+%{python_sitelib}/tinyerp_server*
 %{_defaultdocdir}/%{name}-server-%{version}/
 %{_mandir}/man1/tinyerp-server.*
-%{py_puresitedir}/tinyerp_server-%{version}-py2.6.egg-info
 %{_mandir}/man5/terp_serverrc.5*
 
 %pre server
