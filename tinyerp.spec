@@ -1,16 +1,3 @@
-%if %mdkversion
-%if %mdkversion < 200700
-# default to non-modular X on MDV < 200700
-%define _modular_X 0%{?_with_modular_x:1}
-%else
-# default to modular X on MDV >= 200700
-%define _modular_X 0%{!?_without_modular_x:1}
-%endif
-%else
-# default to modular X elsewhere
-%define _modular_X 0%{!?_without_modular_x:1}
-%endif
-
 %{?!pyver: %define pyver %(python -c 'import sys;print(sys.version[0:3])')}
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
@@ -33,13 +20,7 @@ BuildArch:	noarch
 BuildRequires:	python, pygtk2.0-devel, pygtk2.0-libglade, python-libxslt
 BuildRequires:	python-psycopg, python-dot
 BuildRequires:	desktop-file-utils
-%if %_modular_X
 BuildRequires:	x11-server-xvfb
-%define _xvfb /usr/bin/Xvfb
-%else
-BuildRequires:	xorg-x11-Xvfb
-%define _xvfb /usr/X11R6/bin/Xvfb
-%endif
 Requires:       pygtk2.0, pygtk2.0-libglade
 Requires:	tinyerp-client, tinyerp-server
 Patch0:		tinyerp-client.patch
@@ -86,7 +67,7 @@ time run.
 
 %build
 cd %{name}-client-%{version}
-%{_xvfb} :69 -nolisten tcp -ac -terminate &
+Xvfb:69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py build
 cd ../%{name}-server-%{version}
 DISPLAY=:69 ./setup.py build
@@ -94,7 +75,7 @@ DISPLAY=:69 ./setup.py build
 %install
 rm -rf $RPM_BUILD_ROOT
 cd %{name}-client-%{version}
-%{_xvfb} :69 -nolisten tcp -ac -terminate &
+Xvfb:69 -nolisten tcp -ac -terminate &
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
 cd ../%{name}-server-%{version}
 DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
