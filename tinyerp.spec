@@ -1,10 +1,6 @@
-%{?!pyver: %define pyver %(python -c 'import sys;print(sys.version[0:3])')}
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
-
 Name:		tinyerp
 Version:	4.2.3.4
-Release:	%mkrel 2
+Release:	3
 License:	GPLv2+
 Group:		Databases
 Summary:	ERP Client
@@ -15,14 +11,13 @@ Source2:	tinyerp-server.conf
 Source3:	tinyerp-server.init
 Source4:	tinyerp-server.logrotate
 Source5:	tinyerp-README.urpmi
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:	noarch
-BuildRequires:	python, pygtk2.0-devel, pygtk2.0-libglade, python-libxslt
-BuildRequires:	python-psycopg, python-dot
+BuildRequires:	python pygtk2.0-devel pygtk2.0-libglade python-libxslt
+BuildRequires:	python-psycopg python-dot
 BuildRequires:	desktop-file-utils
 BuildRequires:	x11-server-xvfb
-Requires:       pygtk2.0, pygtk2.0-libglade
-Requires:	tinyerp-client, tinyerp-server
+Requires:       pygtk2.0 pygtk2.0-libglade
+Requires:	tinyerp-client tinyerp-server
 Patch0:		tinyerp-client.patch
 Patch1:		tinyerp-server.patch
 
@@ -32,28 +27,28 @@ covers all domains for small to medium businesses; accounting,
 stock management, sales, customer relationship, purchases,
 project management...
 
-%package client
+%package	client
 Group:		Databases
 Summary:	ERP Client
-Requires:       pygtk2.0, pygtk2.0-libglade, python-dot
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
+Requires:       pygtk2.0 pygtk2.0-libglade python-dot
+Requires(post):	desktop-file-utils
+Requires(postun):desktop-file-utils
 
-%description client
+%description	client
 Client components for Tiny ERP.
 
-%package server
+%package	server
 Group:		System/Servers
 Summary:	ERP Server
-Requires:	pygtk2.0, pygtk2.0-libglade
-Requires:	python-psycopg, python-libxslt
+Requires:	pygtk2.0 pygtk2.0-libglade
+Requires:	python-psycopg python-libxslt
 Requires:	postgresql8.2-plpython
 Requires:	python-imaging
-Requires:	python-psycopg, python-reportlab
-Requires:	graphviz, python-parsing, postgresql8.2-server
+Requires:	python-psycopg python-reportlab
+Requires:	graphviz python-parsing postgresql8.2-server
 Requires:	ghostscript
 Requires(pre):	rpm-helper
-Requires(postun):	rpm-helper
+Requires(postun):rpm-helper
 
 %description server
 Server components for Tiny ERP.
@@ -73,20 +68,20 @@ cd ../%{name}-server-%{version}
 DISPLAY=:69 ./setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
 cd %{name}-client-%{version}
 Xvfb:69 -nolisten tcp -ac -terminate &
-DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
+DISPLAY=:69 ./setup.py install --root=%{buildroot}
 cd ../%{name}-server-%{version}
-DISPLAY=:69 ./setup.py install --root=$RPM_BUILD_ROOT
+DISPLAY=:69 ./setup.py install --root=%{buildroot}
 cd ..
+
 %find_lang tinyerp-client
 
-mv $RPM_BUILD_ROOT/%{_datadir}/tinyerp-client/* $RPM_BUILD_ROOT/%{python_sitelib}/tinyerp-client
-rm -rf $RPM_BUILD_ROOT/%{_datadir}/tinyerp-client
+mv %{buildroot}%{_datadir}/tinyerp-client/* %{buildroot}%{python_sitelib}/tinyerp-client
+rm -rf %{buildroot}%{_datadir}/tinyerp-client
 
-mkdir $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -P %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Tiny ERP
 Comment=Open Source ERP Client
@@ -98,55 +93,25 @@ StartupNotify=true
 Categories=GNOME;GTK;Databases;
 EOF
 
-mkdir -p $RPM_BUILD_ROOT/%{_defaultdocdir}/%{name}-%{version}
-install -m 644 -D %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tinyerp-server.conf
-install -m 755 -D %{SOURCE3} $RPM_BUILD_ROOT%{_initrddir}/tinyerp-server
-install -m 644 -D %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/tinyerp-server
-install -m 755 -D %{SOURCE5} $RPM_BUILD_ROOT%{_defaultdocdir}/%{name}-%{version}/README.urpmi
-mkdir -p $RPM_BUILD_ROOT/var/log/tinyerp
-mkdir -p $RPM_BUILD_ROOT/var/spool/tinyerp
-mkdir -p $RPM_BUILD_ROOT/var/run/tinyerp
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-%files
-%defattr(-,root,root)
-%{_defaultdocdir}/%{name}-%{version}/README.urpmi
-
-%files client -f %{name}-client.lang
-%doc
-%defattr(-,root,root)
-%{_bindir}/tinyerp-client
-%{python_sitelib}/tinyerp-client
-%{python_sitelib}/tinyerp_client*
-%{_defaultdocdir}/%{name}-client-%{version}/
-%{_mandir}/man1/tinyerp-client.*
-%{_datadir}/pixmaps/tinyerp-client/
-%{_datadir}/applications/*.desktop
+install -m644 %{SOURCE2} -D %{buildroot}%{_sysconfdir}/tinyerp-server.conf
+install -m755 %{SOURCE3} -D %{buildroot}%{_initrddir}/tinyerp-server
+install -m644 %{SOURCE4} -D %{buildroot}%{_sysconfdir}/logrotate.d/tinyerp-server
+install -m755 %{SOURCE5} -D %{buildroot}%{_defaultdocdir}/%{name}-%{version}/README.urpmi
+mkdir -p %{buildroot}%{_var}/log/tinyerp
+mkdir -p %{buildroot}%{_var}/spool/tinyerp
+mkdir -p %{buildroot}%{_var}/run/tinyerp
 
 %post client
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
 
 %postun client
-if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null ; fi
+if [ -x %{_bindir}/update-desktop-database ]; then
+	%{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
+fi
 
-%files server
-%defattr(-,root,root)
-%attr(0755,tinyerp,tinyerp) %dir /var/log/tinyerp
-%attr(0755,tinyerp,tinyerp) %dir /var/spool/tinyerp
-%attr(0755,tinyerp,tinyerp) %dir /var/run/tinyerp
-%{_initrddir}/tinyerp-server
-%attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/tinyerp-server.conf
-%attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/logrotate.d/tinyerp-server
-%{_bindir}/tinyerp-server
-%{python_sitelib}/tinyerp-server
-%{python_sitelib}/tinyerp_server*
-%{_defaultdocdir}/%{name}-server-%{version}/
-%{_mandir}/man1/tinyerp-server.*
-%{_mandir}/man5/terp_serverrc.5*
 
 %pre server
-%_pre_useradd tinyerp /var/spool/tinyerp /sbin/nologin
+%_pre_useradd tinyerp %{_var}/spool/tinyerp /sbin/nologin
 
 %post server
 %_post_service tinyerp-server
@@ -157,3 +122,29 @@ if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-dat
 %postun server
 %_postun_service tinyerp-server
 %_postun_userdel tinyerp
+
+%files
+%{_defaultdocdir}/%{name}-%{version}/README.urpmi
+
+%files client -f %{name}-client.lang
+%{_bindir}/tinyerp-client
+%{python_sitelib}/tinyerp-client
+%{python_sitelib}/tinyerp_client*
+%{_defaultdocdir}/%{name}-client-%{version}/
+%{_mandir}/man1/tinyerp-client.*
+%{_datadir}/pixmaps/tinyerp-client/
+%{_datadir}/applications/*.desktop
+
+%files server
+%attr(0755,tinyerp,tinyerp) %dir %{_var}/log/tinyerp
+%attr(0755,tinyerp,tinyerp) %dir %{_var}/spool/tinyerp
+%attr(0755,tinyerp,tinyerp) %dir %{_var}/run/tinyerp
+%{_initrddir}/tinyerp-server
+%attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/tinyerp-server.conf
+%attr(0644,tinyerp,tinyerp) %config(noreplace) %{_sysconfdir}/logrotate.d/tinyerp-server
+%{_bindir}/tinyerp-server
+%{python_sitelib}/tinyerp-server
+%{python_sitelib}/tinyerp_server*
+%{_defaultdocdir}/%{name}-server-%{version}/
+%{_mandir}/man1/tinyerp-server.*
+%{_mandir}/man5/terp_serverrc.5*
