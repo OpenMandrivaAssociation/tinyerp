@@ -1,0 +1,22 @@
+diff -Nru tinyerp-client-3.3.0.orig/bin/tinyerp-client.py tinyerp-client-3.3.0/bin/tinyerp-client.py
+--- tinyerp-client-3.3.0.orig/bin/tinyerp-client.py	2006-05-18 18:06:39.000000000 +0200
++++ tinyerp-client-3.3.0/bin/tinyerp-client.py	2006-05-19 13:15:25.000000000 +0200
+@@ -73,14 +73,13 @@
+ import pango
+ 
+ # end testing
+-APP = 'terp'
+-DIR = 'po'
++APP = 'tinyerp-client'
+ 
+ locale.setlocale(locale.LC_ALL, '')
+-gettext.bindtextdomain(APP, DIR)
++gettext.bindtextdomain(APP)
+ gettext.textdomain(APP)
+-gettext.install(APP, DIR, unicode=1)
+-gtk.glade.bindtextdomain(APP, DIR)
++gettext.install(APP, unicode=1)
++gtk.glade.bindtextdomain(APP)
+ 
+ import options
+ 

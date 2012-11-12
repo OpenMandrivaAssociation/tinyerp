@@ -1,0 +1,27 @@
+diff -Nru tinyerp-server-3.3.0.orig/setup.py tinyerp-server-3.3.0/setup.py
+--- tinyerp-server-3.3.0.orig/setup.py	2006-05-19 10:56:54.000000000 +0200
++++ tinyerp-server-3.3.0/setup.py	2006-05-19 13:21:04.000000000 +0200
+@@ -28,11 +28,18 @@
+ 
+ included_addons = [
+     'account', 'account_followup', 'airport', 'audittrail',
+-    'base','base_partner_relation', 'crm', 'custom', 'delivery', 'edi', 'esale',
+-    'hr', 'hr_timesheet', 'marketing', 'mrp', 'network', 'oscommerce',
+-    'product','product_electronic', 'product_expiry', 'product_extended',
+- 	'productivity_analysis', 'project', 'purchase', 'sale', 'sandwich', 'scrum',
+-    'stock', 'subscription', 'travel',
++    'base','base_partner_relation',
++    'crm', 'custom',
++    'delivery',
++    'edi', 'esale',
++    'hr', 'hr_timesheet', 'hr_timesheet_project',
++    'letter',
++    'marketing', 'mrp',
++    'network',
++    'oscommerce',
++    'product','product_electronic', 'product_expiry', 'product_extended', 'productivity_analysis', 'project', 'purchase',
++    'sale', 'sandwich', 'scrum', 'stock', 'subscription',
++    'travel',
+     'l10n_be', 'l10n_ca-qc', 'l10n_ch', 'l10n_fr', 'l10n_se', 'l10n_simple',]
+ 
+ required_modules = [('psycopg', 'PostgreSQL module'),

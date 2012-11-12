@@ -1,0 +1,7 @@
+sources:
+  "tinyerp-client-4.2.3.4.tar.bz2:"	5bdcda2b1598d297bc25d1d5da2f70225a7dcdb1
+  "tinyerp-README.urpmi:"	dde3da851ef68dd0b73b9e851cdf02569b630073
+  "tinyerp-server-4.2.3.4.tar.bz2:"	297a035e6aa5020b4904ba415c8d947cb4be2f9b
+  "tinyerp-server.conf:"	eb328dc32aa7e1fca2fedd3ef4e3a90decc808d2
+  "tinyerp-server.init:"	3d7589ab8fae9153ce5ba5c9e53965e3654e7fca
+  "tinyerp-server.logrotate:"	18adcae494cd2f1b215693a9a47ac3886107b875
