@@ -21,7 +21,7 @@ Release:	4
 License:	GPLv2+
 Group:		Databases
 Summary:	ERP Client
-URL:		http://tinyerp.org
+URL:		https://tinyerp.org
 Source0:	http://tinyerp.org/download/sources/tinyerp-server-%{version}.tar.bz2
 Source1:	http://tinyerp.org/download/sources/tinyerp-client-%{version}.tar.bz2
 Source2:	tinyerp-server.conf
